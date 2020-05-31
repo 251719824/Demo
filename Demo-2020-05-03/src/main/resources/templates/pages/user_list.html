@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>员工表</h1>
+	<hr />
+	<form>
+	<table>
+		<thead>
+			<tr>
+				<th>员工编号</th>
+				<th>姓名</th>
+				<th>打卡时间</th>
+				<th>修改</th>
+				<th>删除</th>
+			</tr>
+		</thead>
+		<tbody id="tbodyId">
+			<tr>
+				<td>资源加载中</td>
+			</tr>
+			<!-- <tr th:each="a:${usersList}">
+				<td th:text="${a.uid}"></td>
+             	<td th:text="${a.nick_name}"></td>
+			</tr>  -->
+		</tbody>
+	</table>
+	</form>
+	</div>
+	<div id="pageId" class="box-footer clearfix"> </div>
+	<script type="text/javascript" src="../js/ajax.js"></script>
+	<script type="text/javascript">
+	
+	   //通过如下函数向服务端发送异步请求获取activity数据并更新到页面
+    (/* 	function(){   
+	  $("#pageId").load("doPageUI",function(){
+		  doGetUsers();
+	  });
+	 
+    }); */
+    		
+    		
+    function doGetUsers(){
+ 	   /* //1.params
+ 	   //获取在Page.html中绑定的当前页码值
+ 	   var pageCurrent=$("#pageId").data("pageNo");
+ 	   //假如没有值,设置初始值为1
+ 	   if(!pageNo)pageNo=1;
+ 	   //var params="pageCurrrent="+pageCurrent;
+ 	   var params={"pageNo":pageNo}; */
+  	// debugger
+  	  //1.定义请求参数
+  	  const params="";
+  	  //2.定义请求的url
+  	  const url="findAlls"
+  	  //3.发送异步请求获取服务端资源并更新到页面
+  	  doAjaxGet(url,params,function(result){
+  		  //在浏览器控制台输出result
+  		  console.log("jsonStr",result);
+  		  doHandleReponseResult(result);
+  	  });
+    })()
+    //处理响应结果
+    function doHandleReponseResult(result){//json string
+  	  //debugger
+  	  //1.将json格式字符串转换json格式的js对象
+  	  //1.1 JSON的parse方法可以将json格式的字符串转换成json格式的js对象
+  	  const jsonObj=JSON.parse(result);
+        console.log("jsonObj",jsonObj);
+  	  //2.将json对象中的数据更新到页面上
+  	  //2.1迭代jsonObj对象中的数据，并将数据拼接到tr字符串中
+  	  let trs="";
+  	  for(const row of jsonObj.data.records){
+  		  trs+="<tr>"+
+  		   "<td>"+row.uid+"</td>"+
+  		   "<td>"+row.nickName+"</td>"+
+  		   "<td>修改</td>"+
+		   "<td>删除</td>"+
+  		  "</tr>"
+  	  }
+  	  //2.2将字符串以html形式更新到tbody位置
+  	  const tBody=document.getElementById("tbodyId");
+  	  console.log("trs",trs);
+  	  tBody.innerHTML= trs;
+    }
+	</script>
+	
+</body>
+</html>

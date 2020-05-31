@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+  <h1>The Activity Page</h1>
+  
+  <div>
+  <button  onclick="javascript:location.href='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588490595000&di=34a6cf08fc1243a57b3d6b7cf7e42717&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201808%2F06%2F20180806222244_wjotp.thumb.224_0.jpg'">点我</button></div>
+  <hr />
+  <div>
+     <table>
+        <thead>
+           <tr>
+           <th>uid</th>
+           <th>nickName</th>
+           <th>update</th>
+           <th>delete</th>
+           </tr>
+        </thead>
+        <tbody>
+           <tr th:each="a:${userList}">
+             <td th:text="${a.uid}"></td>
+             <td th:text="${a.nickName}"></td>
+             <td>
+           	<a th:href="@{/activity/doFindById(id=${a.uid})}">update</a> 
+             </td>
+             <td>
+             	<a th:href="@{/activity/doDeleteById(id=${a.uid})}">delete</a> 
+             </td>
+           </tr>
+        </tbody>
+     </table>
+  
+  </div>
+</body>
+</html>
